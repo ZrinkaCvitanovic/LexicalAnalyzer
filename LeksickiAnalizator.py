@@ -1,12 +1,5 @@
 # ne koristiti regexe!
-# operatori nemaju razmake, znaci moram rijeci splittai na charactere
 # TODO: implementiraj zagrade
-# TODO: slučaj kad varijabla ima broj u sebi -> prvo provjeri je li operator, ako nije onda broj/slovo pohrani u polje
-# kad dođem do operatora idem po tom polju i gledam je li u njemu konstanta ili ime varijable
-# nakon zagrade može se javiti i izraz pa i to zahtijeva još jednu provjeru
-# bjeline se mogu nalaziti među leksičkim jedinkama
-
-
 def isoperator(word, line_counter):
     if word == "+":
         print('OP_PLUS ', line_counter, ' ', word)
