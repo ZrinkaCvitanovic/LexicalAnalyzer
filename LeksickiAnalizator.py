@@ -1,5 +1,5 @@
 # ne koristiti regexe!
-# TODO: implementiraj zagrade
+# TODO: implementiraj zagrade!
 def isoperator(word, line_counter):
     if word == "+":
         print('OP_PLUS ', line_counter, ' ', word)
