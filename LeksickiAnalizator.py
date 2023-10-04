@@ -20,7 +20,8 @@ def isoperator(word, line_counter):
 
 
 def isvariable(word):
-    if word[0].isalpha() == False: return False
+    if not word[0].isalpha():
+        return False
     for char in word:
         if char.isalpha() or str(char).isdigit():
             continue
@@ -31,7 +32,8 @@ def isvariable(word):
 
 def isconst(word):
     for char in word:
-        if str(char).isdigit() == False: return False
+        if not str(char).isdigit():
+            return False
     return True
 
 
@@ -47,6 +49,13 @@ def check_expression(word, line_counter):
                 print('BROJ', line_counter, ' ', variable_or_const)
             isoperator(character, line_counter)
             variable_or_const = ""
+
+    if variable_or_const != "":
+        if isvariable(variable_or_const):
+            print('IDN ', line_counter, ' ', variable_or_const)
+        elif isconst(variable_or_const):
+            print('BROJ', line_counter, ' ', variable_or_const)
+
 
 
 def check_long_words(word, line_counter):
@@ -81,12 +90,14 @@ def main():
         line_counter += 1
         for word in words:
             if word.startswith("//"):
-                continue
-            if len(word) > 1:
+                break
+            elif len(word) > 1:
                 check_long_words(word, line_counter)
             else:
-                if isconst(word): print('BROJ', line_counter, ' ', word)
-                elif isvariable(word): print('IDN', line_counter, ' ', word)
+                if isconst(word):
+                    print('BROJ', line_counter, ' ', word)
+                elif isvariable(word):
+                    print('IDN', line_counter, ' ', word)
                 else: isoperator(word, line_counter)
 
 
