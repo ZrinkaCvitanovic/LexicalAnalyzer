@@ -92,22 +92,25 @@ def check_long_words(word, line_counter):
 def main():
     line_counter = 0
     while True:
-        user_input = input("")
-        if not user_input:
+        try:
+            user_input = input("")
+            if not user_input:
+                continue
+            words = user_input.split()
+            line_counter += 1
+            for word in words:
+                if word.startswith("//"):
+                    break
+                elif len(word) > 1:
+                    check_long_words(word, line_counter)
+                else:
+                    if isconst(word):
+                        print('BROJ', line_counter, word)
+                    elif isvariable(word):
+                        print('IDN', line_counter, word)
+                    else: isoperator(word, line_counter)
+        except EOFError:
             break
-        words = user_input.split()
-        line_counter += 1
-        for word in words:
-            if word.startswith("//"):
-                break
-            elif len(word) > 1:
-                check_long_words(word, line_counter)
-            else:
-                if isconst(word):
-                    print('BROJ', line_counter, word)
-                elif isvariable(word):
-                    print('IDN', line_counter, word)
-                else: isoperator(word, line_counter)
 
 
 if __name__ == "__main__":
