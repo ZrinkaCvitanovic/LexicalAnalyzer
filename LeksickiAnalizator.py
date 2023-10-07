@@ -79,6 +79,17 @@ def check_long_words(word, line_counter):
 
     # can be either a variable, a constant or an expression
     else:
+        if word[0].isdigit():
+                const = ""
+                counter = 0
+                for char in word:
+                    if char.isdigit():
+                        counter += 1
+                        const += char
+                    else:
+                        print('BROJ', line_counter, const)
+                        word = word[counter::]
+                        break
         if isvariable(word):
             print('IDN', line_counter, word)
             return
@@ -95,6 +106,7 @@ def main():
         try:
             user_input = input("")
             if not user_input:
+                line_counter += 1
                 continue
             words = user_input.split()
             line_counter += 1
