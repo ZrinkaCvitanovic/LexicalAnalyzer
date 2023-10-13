@@ -1,4 +1,4 @@
-space_counter = 1
+space_counter = 0
 tree = open("tree.txt", "w")
 
 
@@ -41,9 +41,9 @@ def assign_operator(line):
         err_msg = line[0].split()
         print("err", err_msg[0], err_msg[1], err_msg[2])
         return False
-    tree.write(" " * space_counter + " <naredba>" + "\n")
-    tree.write(" " * space_counter + "  <naredba_pridruzivanja>" + "\n")
-    increment(3)
+    tree.write(" " * space_counter + "<naredba>" + "\n")
+    tree.write(" " * space_counter + " <naredba_pridruzivanja>" + "\n")
+    increment(2)
     prefix = " " * space_counter
     tree.write(prefix + line[0] + "\n")
     tree.write(prefix + line[1] + "\n")
@@ -57,9 +57,11 @@ def assign_operator(line):
         tree.write(prefix + "<T_lista>" + "\n")
         if len(line) <= 3:
             tree.write(prefix + " $" + "\n")
-            tree.write(prefix + "<E lista>" + "\n")
+            increment(-1)
+            prefix = " "*space_counter
+            tree.write(prefix + "<E_lista>" + "\n")
             tree.write(prefix + " $" + "\n")
-        increment(-5)
+        increment(-4)
 
         return True
 
@@ -110,7 +112,8 @@ def main():
                 else:  # finished reading the entire line
                     line_counter += 1
                     next_line.append(line)
-                    tree.write(" " * space_counter + "<lista naredbi>\n")
+                    increment(1)
+                    tree.write(" " * space_counter + "<lista_naredbi>\n")
                     increment(1)
                     comm = define_command(current_line)
                     if not comm:
@@ -121,7 +124,8 @@ def main():
 
     if current_line:
         increment(1)
-        tree.write(" "*space_counter + "<lista naredbi>\n")
+        tree.write(" "*space_counter + "<lista_naredbi>\n")
+        increment(1)
         define_command(current_line)
     tree.close()
 
@@ -129,6 +133,7 @@ def main():
         lines = print_tree.readlines()
         for line in lines:
             print(line, end="")
+        print("\n")
 
 
 if __name__ == "__main__":
