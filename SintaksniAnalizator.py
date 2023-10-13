@@ -13,10 +13,15 @@ def iskeyword(line):
 
 def define_command(line):
     found = False
+    if not line or len(line[0]) < 1:
+        tree.write(" " * space_counter + "$" + "\n")
+        return False
+
     for current_command in line:
         command = current_command.split()[0]
         if command == "OP_PRIDRUZI":
             found = assign_operator(line)
+            return found
         elif command == "OP_PLUS":
             found = plus_operator(line)
         elif command == "OP_MINUS":
@@ -122,11 +127,17 @@ def main():
             except EOFError:
                 break
 
-    if current_line:
+    #if current_line:
+    increment(1)
+    tree.write(" "*space_counter + "<lista_naredbi>\n")
+    increment(1)
+    one_more = define_command(current_line)
+    current_line = list()
+    while one_more:
         increment(1)
-        tree.write(" "*space_counter + "<lista_naredbi>\n")
+        tree.write(" " * space_counter + "<lista_naredbi>\n")
         increment(1)
-        define_command(current_line)
+        one_more = define_command(current_line)
     tree.close()
 
     with open("tree.txt", "r") as print_tree:
