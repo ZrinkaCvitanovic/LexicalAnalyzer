@@ -44,7 +44,6 @@ def assign_operator(line):
     tree.write(" " * space_counter + " <naredba>" + "\n")
     tree.write(" " * space_counter + "  <naredba_pridruzivanja>" + "\n")
     increment(3)
-    print("increment: ", space_counter)
     prefix = " " * space_counter
     tree.write(prefix + line[0] + "\n")
     tree.write(prefix + line[1] + "\n")
@@ -53,7 +52,6 @@ def assign_operator(line):
         tree.write(prefix + " <T>" + "\n")
         tree.write(prefix + "  <P>" + "\n")
         increment(2)
-        print("increment: ", space_counter)
         prefix =" " * space_counter
         tree.write(prefix + " " + line[2] + "\n")
         tree.write(prefix + "<T_lista>" + "\n")
@@ -62,7 +60,6 @@ def assign_operator(line):
             tree.write(prefix + "<E lista>" + "\n")
             tree.write(prefix + " $" + "\n")
         increment(-5)
-        print("increment: ", space_counter)
 
         return True
 
@@ -115,7 +112,6 @@ def main():
                     next_line.append(line)
                     tree.write(" " * space_counter + "<lista naredbi>\n")
                     increment(1)
-                    print("increment: ", space_counter)
                     comm = define_command(current_line)
                     if not comm:
                         return
@@ -125,7 +121,6 @@ def main():
 
     if current_line:
         increment(1)
-        print("increment: ", space_counter)
         tree.write(" "*space_counter + "<lista naredbi>\n")
         define_command(current_line)
     tree.close()
